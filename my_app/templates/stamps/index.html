@@ -1,18 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %}
 
 {% block title %}
-    My Stamps
+My Stamps
 {% endblock %}
 
 {% block head %}
-<h1> ABOUT HEADER </h1>
+<link rel="stylesheet" href="{% static 'css/stamps/stamp-index.css' %}"/>
 {% endblock %}
 
 {% block content %}
-  <body>
 
+<section class="page-header">
     <h1> Your Stamps!</h1>
-    <p> Check out your stamps! </p>
+</section>
+
+<section class="card-container">
+  {% for stamp in stamps %}
+  <div class="card">
+    <a href="{% url 'stamp-detail' stamp.id %}">
+      <h2 class="card-title">{{ stamp.get_name_display }}</h2>
+      <p>{{ stamp.get_season_display }}, {{ stamp.year }}</p>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+
     
-  </body>
+
 {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% load static %} 
+
+{% block title %}
+Details
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cats/stamp-detail.css' %}" />
+{% endblock %} 
+
+{% block content %}
+<section class="stamp-container">
+    <div class="stamp-actions">
+        <a href="{% url 'stamp-index' %}" class="btn">Back to Stamps</a>
+    </div>
+    <div class="stamp-details">
+        <h2> {{ stamp.get_name_display }} 
+        {% if stamp.days > 1 %}
+        for {{ stamp.days }} days 
+        {% else %}
+        for {{ stamp.days }} day 
+        </h2>
+        {% endif %}
+        <h1>{{ stamp.get_season_display }}, {{ stamp.year }} </h1>
+        <h3>{{ stamp.description }}</h3>
+        <div class="stamp-actions">
+            <a href="{% url 'stamp-update' stamp.id %}" class="btn warn">Edit</a>
+            <a href="{% url 'stamp-delete' stamp.id %}" class="btn danger">Delete</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

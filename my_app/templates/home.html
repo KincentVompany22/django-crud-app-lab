@@ -1,18 +1,17 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %} {% load static %} 
 
 {% block title %}
     Home
 {% endblock %}
 
 {% block head %}
-<h1> HOME HEADER </h1>
-{% endblock %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock %} 
 
 {% block content %}
-  <body>
-
-    <h1> Stamped </h1>
-    <p> Where the world leaves its mark </p>
-
-  </body>
+<section class="logo-container">
+  <div class="stamp-container">
+    <img src="{% static 'images/StampedLogo.svg' %}" alt="Stamped logo image" />
+  </div>
+</section>
 {% endblock %}
