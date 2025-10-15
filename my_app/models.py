@@ -64,12 +64,16 @@ class Stop(models.Model):
     # In a one-to-many relationship, the on_delete=models.CASCADE is required.
     # It ensures that if a Stamp record is deleted, all of the child Stops will be deleted automatically as well
         # - thus avoiding orphan records for Stops that are no longer tied to an existing Stamp.
-    # child has foreign key pointing at parent
     
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("stamp-detail", kwargs={"pk": self.stamp.pk}) # reference stamp because we are redirecting to the stamp details page
+
+
+'''
     class Meta:
         ordering = ['-date']
-    
+'''
 

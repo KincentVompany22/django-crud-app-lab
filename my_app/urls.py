@@ -10,6 +10,6 @@ urlpatterns = [
     path('stamps/<int:pk>/update/', views.StampUpdate.as_view(), name='stamp-update'),
     path('stamps/<int:pk>/delete/', views.StampDelete.as_view(), name='stamp-delete'),
 
-    path('stamps/<int:stamp_id>/add-stop/', views.add_stop, name='add-stop'),
-    
+    path('stamps/<int:stamp_id>/stop-create/', views.StopCreate.as_view(), name='stop-create'),
+
 ]
