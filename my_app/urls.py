@@ -11,5 +11,7 @@ urlpatterns = [
     path('stamps/<int:pk>/delete/', views.StampDelete.as_view(), name='stamp-delete'),
 
     path('stamps/<int:stamp_id>/stop-create/', views.StopCreate.as_view(), name='stop-create'),
+    path('stamps/<int:stamp_id>/stop/<int:pk>/stop-update', views.StopUpdate.as_view(), name='stop-update'),
+    path('stamps/<int:stamp_id>/stop/<int:pk>/stop-delete', views.StopDelete.as_view(), name='stop-delete'),
 
 ]

@@ -71,9 +71,7 @@ class Stop(models.Model):
     def get_absolute_url(self):
         return reverse("stamp-detail", kwargs={"pk": self.stamp.pk}) # reference stamp because we are redirecting to the stamp details page
 
-
-'''
     class Meta:
         ordering = ['-date']
-'''
+
 

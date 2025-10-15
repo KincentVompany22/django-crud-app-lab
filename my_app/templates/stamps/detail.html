@@ -54,6 +54,8 @@ Details
             <td>{{stop.name}}</td>
             <td>{{stop.date}}</td>
             <td>{{stop.get_rating_display}}</td>
+            <td><a href="{% url 'stop-update' stamp.id stop.id %}" class="btn warn">Edit</a></td>
+            <td><a href="{% url 'stop-delete' stamp.id stop.id %}" class="btn danger">Delete</a></td>
           </tr>
         {% endfor %}
       </tbody>
