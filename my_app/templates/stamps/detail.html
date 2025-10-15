@@ -5,7 +5,7 @@ Details
 {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/cats/stamp-detail.css' %}" />
+<link rel="stylesheet" href="{% static 'css/stamps/stamp-detail.css' %}" />
 {% endblock %} 
 
 {% block content %}
@@ -19,8 +19,8 @@ Details
         for {{ stamp.days }} days 
         {% else %}
         for {{ stamp.days }} day 
-        </h2>
         {% endif %}
+        </h2>
         <h1>{{ stamp.get_season_display }}, {{ stamp.year }} </h1>
         <h3>{{ stamp.description }}</h3>
         <div class="stamp-actions">
@@ -33,13 +33,12 @@ Details
 <div class="stamp-details-container">
   <section class="stops">
 
+    <a href="{% url 'stop-create' stamp.id %}" class="btn">Add a Stop</a>
+
     <div class="subsection-title">
-      <h2>Stops</h2>
+      <h2>Past Stops</h2>
     </div>
-
-    <h3>Add a Stop</h3>
-    <a href="{% url 'stop-create' stamp.id %}" class="btn">Add Stop</a>
-
+    {% if stamp.stop_set.all.count %}
     <table>
       <thead>
         <tr>
@@ -60,7 +59,9 @@ Details
         {% endfor %}
       </tbody>
     </table>
-
+    {% else %}
+    <h3> No stops added yet! </h3>
+    {% endif %}
   </section>
 </div>
 {% endblock %}
