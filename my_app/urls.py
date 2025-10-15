@@ -9,4 +9,7 @@ urlpatterns = [
     path('stamps/create/', views.StampCreate.as_view(), name='stamp-create'),
     path('stamps/<int:pk>/update/', views.StampUpdate.as_view(), name='stamp-update'),
     path('stamps/<int:pk>/delete/', views.StampDelete.as_view(), name='stamp-delete'),
+
+    path('stamps/<int:stamp_id>/add-stop/', views.add_stop, name='add-stop'),
+    
 ]

@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, redirect
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Stamp
-from django.http import HttpResponse
+from .forms import StopForm
+
 
 # Create your views here.
 
@@ -15,9 +17,19 @@ def stamps_index(request):
     stamps = Stamp.objects.all()
     return render(request, 'stamps/index.html', {'stamps': stamps})
 
+def add_stop(request, stamp_id):
+    form = StopForm(request.POST)
+    if form.is_valid():
+        new_stop = form.save(commit=False)
+        new_stop.stamp_id = stamp_id
+        new_stop.save()
+    return redirect('stamp-detail', pk=stamp_id) # since my stamp details is a class-based view, need to route using pk instead of stamp_id 
+
 class StampDetail(DetailView):
     model = Stamp
     template_name = 'stamps/detail.html'
+   # context_object_name = 'stamp'
+    extra_context = {'stop_form': StopForm()} # extra_context - how to pass through additional context using a class-based view as opposed to a view function (like 'stamps' above)
 
 class StampCreate(CreateView):
     model = Stamp

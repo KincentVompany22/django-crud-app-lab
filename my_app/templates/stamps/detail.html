@@ -29,4 +29,40 @@ Details
         </div>
     </div>
 </section>
+
+<div class="stamp-details-container">
+  <section class="stops">
+
+    <div class="subsection-title">
+      <h2>Stops</h2>
+    </div>
+
+    <h3>Add a Stop</h3>
+        <form action="{% url 'add-stop' stamp.id %}" method="post" class="subsection-content" autocomplete="off">
+            {% csrf_token %} 
+            {{ stop_form.as_p }}
+            <button type="submit" class="btn submit">Add Stop</button>
+        </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>City</th>
+          <th>Date</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stop in stamp.stop_set.all %}
+          <tr>
+            <td>{{stop.name}}</td>
+            <td>{{stop.date}}</td>
+            <td>{{stop.get_rating_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </section>
+</div>
 {% endblock %}
