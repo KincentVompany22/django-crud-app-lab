@@ -11,7 +11,11 @@ Details
 {% block content %}
 <section class="stamp-container">
     <div class="stamp-actions">
-        <a href="{% url 'stamp-index' %}" class="btn">Back to Stamps</a>
+        {% if stamp.user == request.user %}
+        <a href="{% url 'stamp-index' %}" class="btn">Back to Your Stamps</a>
+        {% else %}
+        <a href="{% url 'all-stamp-index' %}" class="btn">Back to All Stamps</a>
+        {% endif %}
     </div>
     <div class="stamp-details">
         <h2> {{ stamp.get_name_display }} 
@@ -24,8 +28,10 @@ Details
         <h1>{{ stamp.get_season_display }}, {{ stamp.year }} </h1>
         <h3>{{ stamp.description }}</h3>
         <div class="stamp-actions">
+          {% if stamp.user == request.user %}
             <a href="{% url 'stamp-update' stamp.id %}" class="btn warn">Edit</a>
             <a href="{% url 'stamp-delete' stamp.id %}" class="btn danger">Delete</a>
+          {% endif %}
         </div>
     </div>
 </section>
@@ -33,8 +39,10 @@ Details
 <div class="stamp-details-container">
   <section class="stops">
 
+    {% if stamp.user == request.user %}
     <a href="{% url 'stop-create' stamp.id %}" class="btn">Add a Stop</a>
-
+    {% endif %}
+    
     <div class="subsection-title">
       <h2>Past Stops</h2>
     </div>
@@ -53,8 +61,11 @@ Details
             <td>{{stop.name}}</td>
             <td>{{stop.date}}</td>
             <td>{{stop.get_rating_display}}</td>
+            {% if stamp.user == request.user %}
             <td><a href="{% url 'stop-update' stamp.id stop.id %}" class="btn warn">Edit</a></td>
             <td><a href="{% url 'stop-delete' stamp.id stop.id %}" class="btn danger">Delete</a></td>
+            {% endif %}
+            
           </tr>
         {% endfor %}
       </tbody>
